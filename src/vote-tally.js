@@ -114,9 +114,9 @@ angular
 		template: `
 			<div class="vote-tally">
 				<div class="progress">
-					<div ng-class="$ctrl.settings.approve.class" style="width: {{$ctrl.settings.approve.width}}%" tooltip="{{$ctrl.approve}} in favour" tooltip-position="bottom" tooltip-show="true"></div>
-					<div ng-class="$ctrl.settings.abstain.class" style="width: {{$ctrl.settings.abstain.width}}%" tooltip="{{$ctrl.abstain}} abstain" tooltip-position="bottom" tooltip-show="true"></div>
-					<div ng-class="$ctrl.settings.reject.class" style="width: {{$ctrl.settings.reject.width}}%" tooltip="{{$ctrl.reject}} reject" tooltip-position="bottom" tooltip-show="true"></div>
+					<div ng-class="$ctrl.settings.approve.class" style="width: {{$ctrl.settings.approve.width}}%" tooltip="{{$ctrl.approve}} in favour" tooltip-position="bottom"></div>
+					<div ng-class="$ctrl.settings.abstain.class" style="width: {{$ctrl.settings.abstain.width}}%" tooltip="{{$ctrl.abstain}} abstain" tooltip-position="bottom"></div>
+					<div ng-class="$ctrl.settings.reject.class" style="width: {{$ctrl.settings.reject.width}}%" tooltip="{{$ctrl.reject}} reject" tooltip-position="bottom"></div>
 					<div class="vote-tally-target" style="width: {{$ctrl.settings.target.width}}%">
 						<div class="vote-tally-target-arrow-down"></div>
 						<div class="vote-tally-target-arrow-up"></div>

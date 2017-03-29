@@ -20,8 +20,8 @@ npm install --save @momsfriendlydevco/vote-tally
 2. Install the required script + CSS somewhere in your build chain or include it in a HTML header:
 
 ```html
-<script src="/libs/vote-tally/src/votetally.min.js"/>
-<link href="/libs/vote-tally/vote-tally.min.css" rel="stylesheet" type="text/css"/>
+<script src="/libs/vote-tally/dist/votetally.min.js"/>
+<link href="/libs/vote-tally/dist/vote-tally.min.css" rel="stylesheet" type="text/css"/>
 ```
 
 

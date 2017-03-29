@@ -39,7 +39,7 @@
     "jquery": "^3.2.1"
   },
   "dependencies": {
-    "angular": "^1.6.3",
-    "angular-bs-tooltip": "^1.0.0"
+    "@momsfriendlydevco/angular-bs-tooltip": "^1.1.0",
+    "angular": "^1.6.3"
   }
 }

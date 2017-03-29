@@ -15,6 +15,7 @@
 }
 
 .vote-tally .vote-tally-target {
+	pointer-events: none;
 	position: relative;
 	border-right: 1px dashed #000;
 	height: 40px;
