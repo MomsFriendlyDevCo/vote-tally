@@ -81,6 +81,9 @@ angular
 					width: 0, // Calculated
 					count: 0, // Calculated
 				},
+				target: { // Meta class for the target element
+					width: 0, // Calculated
+				},
 			};
 
 			// Recalculate targets based on method + changes {{{
@@ -93,6 +96,7 @@ angular
 
 				$ctrl.settings.approve.target = ratio.toWin;
 				$ctrl.settings.reject.target = ratio.toLose;
+				$ctrl.settings.target.width = ratio.toWin / $ctrl.total * 100;
 			});
 			// }}}
 
@@ -113,6 +117,10 @@ angular
 					<div ng-class="$ctrl.settings.approve.class" style="width: {{$ctrl.settings.approve.width}}%" tooltip="{{$ctrl.approve}} in favour" tooltip-position="bottom" tooltip-show="true"></div>
 					<div ng-class="$ctrl.settings.abstain.class" style="width: {{$ctrl.settings.abstain.width}}%" tooltip="{{$ctrl.abstain}} abstain" tooltip-position="bottom" tooltip-show="true"></div>
 					<div ng-class="$ctrl.settings.reject.class" style="width: {{$ctrl.settings.reject.width}}%" tooltip="{{$ctrl.reject}} reject" tooltip-position="bottom" tooltip-show="true"></div>
+					<div class="vote-tally-target" style="width: {{$ctrl.settings.target.width}}%">
+						<div class="vote-tally-target-arrow-down"></div>
+						<div class="vote-tally-target-arrow-up"></div>
+					</div>
 				</div>
 				<div ng-if="$ctrl.summary" class="container row">
 					<div class="col-md-3 text-center">
