@@ -72,8 +72,8 @@ angular
 					target: 0, // Calculated
 				},
 				abstain: {
-					class: 'progress-bar progress-bar-info pull-right',
-					summaryClass: 'alert alert-info',
+					class: 'progress-bar progress-bar-default pull-right',
+					summaryClass: 'alert alert-default',
 					width: 0, // Calculated
 				},
 				waiting: { // Meta class for votes we are waiting on (derived from total - votes)
@@ -108,23 +108,25 @@ angular
 			// }}}
 		},
 		template: `
-			<div class="progress">
-				<div ng-class="$ctrl.settings.approve.class" style="width: {{$ctrl.settings.approve.width}}%" tooltip="{{$ctrl.approve}} in favour" tooltip-position="bottom" tooltip-show="true"></div>
-				<div ng-class="$ctrl.settings.abstain.class" style="width: {{$ctrl.settings.abstain.width}}%" tooltip="{{$ctrl.abstain}} abstain" tooltip-position="bottom" tooltip-show="true"></div>
-				<div ng-class="$ctrl.settings.reject.class" style="width: {{$ctrl.settings.reject.width}}%" tooltip="{{$ctrl.reject}} reject" tooltip-position="bottom" tooltip-show="true"></div>
-			</div>
-			<div ng-if="$ctrl.summary" class="container row">
-				<div class="col-md-3 text-center">
-					<div ng-class="$ctrl.settings.approve.summaryClass">{{$ctrl.approve}} / {{$ctrl.settings.approve.target}} to pass</div>
+			<div class="vote-tally">
+				<div class="progress">
+					<div ng-class="$ctrl.settings.approve.class" style="width: {{$ctrl.settings.approve.width}}%" tooltip="{{$ctrl.approve}} in favour" tooltip-position="bottom" tooltip-show="true"></div>
+					<div ng-class="$ctrl.settings.abstain.class" style="width: {{$ctrl.settings.abstain.width}}%" tooltip="{{$ctrl.abstain}} abstain" tooltip-position="bottom" tooltip-show="true"></div>
+					<div ng-class="$ctrl.settings.reject.class" style="width: {{$ctrl.settings.reject.width}}%" tooltip="{{$ctrl.reject}} reject" tooltip-position="bottom" tooltip-show="true"></div>
 				</div>
-				<div class="col-md-3 text-center">
-					<div ng-class="$ctrl.settings.reject.summaryClass">{{$ctrl.reject}} / {{$ctrl.settings.reject.target}} to reject</div>
-				</div>
-				<div class="col-md-3 text-center">
-					<div ng-class="$ctrl.settings.waiting.summaryClass">{{$ctrl.settings.waiting.count}} to vote</div>
-				</div>
-				<div class="col-md-3 text-center">
-					<div ng-class="$ctrl.settings.abstain.summaryClass">{{$ctrl.abstain}} abstaining</div>
+				<div ng-if="$ctrl.summary" class="container row">
+					<div class="col-md-3 text-center">
+						<div ng-class="$ctrl.settings.approve.summaryClass">{{$ctrl.approve}} / {{$ctrl.settings.approve.target}} to pass</div>
+					</div>
+					<div class="col-md-3 text-center">
+						<div ng-class="$ctrl.settings.reject.summaryClass">{{$ctrl.reject}} / {{$ctrl.settings.reject.target}} to reject</div>
+					</div>
+					<div class="col-md-3 text-center">
+						<div ng-class="$ctrl.settings.waiting.summaryClass">{{$ctrl.settings.waiting.count}} to vote</div>
+					</div>
+					<div class="col-md-3 text-center">
+						<div ng-class="$ctrl.settings.abstain.summaryClass">{{$ctrl.abstain}} abstaining</div>
+					</div>
 				</div>
 			</div>
 		`,

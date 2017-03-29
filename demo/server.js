@@ -32,6 +32,10 @@ app.get('/vote-tally.js', function(req, res) {
 	res.sendFile('vote-tally.js', {root: root + '/src'});
 });
 
+app.get('/vote-tally.css', function(req, res) {
+	res.sendFile('vote-tally.css', {root: root + '/src'});
+});
+
 app.use(function(err, req, res, next){
 	console.error(err.stack);
 	res.send(500, 'Something broke!').end();

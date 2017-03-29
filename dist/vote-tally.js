@@ -3,6 +3,12 @@
 angular.module('angular-ui-vote-tally', []).service('VoteTally', function () {
 	return {
 		/**
+  * Collection of supported voting methods
+  * @var {array}
+  */
+		methods: [{ id: '2/3rds', title: 'Two-thirds majority' }, { id: '50/50', title: '50% wins' }],
+
+		/**
   * Calculate Win/Lose ratios for various voting types
   * @param {Object} options Options to use
   * @param {number} options.total The total number of votes
@@ -60,8 +66,8 @@ angular.module('angular-ui-vote-tally', []).service('VoteTally', function () {
 				width: 0, // Calculated
 				target: 0 },
 			abstain: {
-				class: 'progress-bar progress-bar-info pull-right',
-				summaryClass: 'alert alert-info',
+				class: 'progress-bar progress-bar-default pull-right',
+				summaryClass: 'alert alert-default',
 				width: 0 },
 			waiting: { // Meta class for votes we are waiting on (derived from total - votes)
 				summaryClass: 'alert alert-info',
@@ -99,5 +105,5 @@ angular.module('angular-ui-vote-tally', []).service('VoteTally', function () {
 		});
 		// }}}
 	}],
-	template: '\n\t\t\t<div class="progress">\n\t\t\t\t<div ng-class="$ctrl.settings.approve.class" style="width: {{$ctrl.settings.approve.width}}%" tooltip="{{$ctrl.approve}} in favour" tooltip-position="bottom" tooltip-show="true"></div>\n\t\t\t\t<div ng-class="$ctrl.settings.abstain.class" style="width: {{$ctrl.settings.abstain.width}}%" tooltip="{{$ctrl.abstain}} abstain" tooltip-position="bottom" tooltip-show="true"></div>\n\t\t\t\t<div ng-class="$ctrl.settings.reject.class" style="width: {{$ctrl.settings.reject.width}}%" tooltip="{{$ctrl.reject}} reject" tooltip-position="bottom" tooltip-show="true"></div>\n\t\t\t</div>\n\t\t\t<div ng-if="$ctrl.summary" class="container row">\n\t\t\t\t<div class="col-md-3">\n\t\t\t\t\t<div ng-class="$ctrl.settings.approve.summaryClass">{{$ctrl.approve}} / {{$ctrl.settings.approve.target}} to pass</div>\n\t\t\t\t</div>\n\t\t\t\t<div class="col-md-3">\n\t\t\t\t\t<div ng-class="$ctrl.settings.reject.summaryClass">{{$ctrl.reject}} / {{$ctrl.settings.reject.target}} to reject</div>\n\t\t\t\t</div>\n\t\t\t\t<div class="col-md-3">\n\t\t\t\t\t<div ng-class="$ctrl.settings.waiting.summaryClass">{{$ctrl.settings.waiting.count}} to vote</div>\n\t\t\t\t</div>\n\t\t\t\t<div class="col-md-3">\n\t\t\t\t\t<div ng-class="$ctrl.settings.abstain.summaryClass">{{$ctrl.abstain}} abstaining</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<pre>{{$ctrl | json}}</pre>\n\t\t'
+	template: '\n\t\t\t<div class="vote-tally">\n\t\t\t\t<div class="progress">\n\t\t\t\t\t<div ng-class="$ctrl.settings.approve.class" style="width: {{$ctrl.settings.approve.width}}%" tooltip="{{$ctrl.approve}} in favour" tooltip-position="bottom" tooltip-show="true"></div>\n\t\t\t\t\t<div ng-class="$ctrl.settings.abstain.class" style="width: {{$ctrl.settings.abstain.width}}%" tooltip="{{$ctrl.abstain}} abstain" tooltip-position="bottom" tooltip-show="true"></div>\n\t\t\t\t\t<div ng-class="$ctrl.settings.reject.class" style="width: {{$ctrl.settings.reject.width}}%" tooltip="{{$ctrl.reject}} reject" tooltip-position="bottom" tooltip-show="true"></div>\n\t\t\t\t</div>\n\t\t\t\t<div ng-if="$ctrl.summary" class="container row">\n\t\t\t\t\t<div class="col-md-3 text-center">\n\t\t\t\t\t\t<div ng-class="$ctrl.settings.approve.summaryClass">{{$ctrl.approve}} / {{$ctrl.settings.approve.target}} to pass</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class="col-md-3 text-center">\n\t\t\t\t\t\t<div ng-class="$ctrl.settings.reject.summaryClass">{{$ctrl.reject}} / {{$ctrl.settings.reject.target}} to reject</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class="col-md-3 text-center">\n\t\t\t\t\t\t<div ng-class="$ctrl.settings.waiting.summaryClass">{{$ctrl.settings.waiting.count}} to vote</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class="col-md-3 text-center">\n\t\t\t\t\t\t<div ng-class="$ctrl.settings.abstain.summaryClass">{{$ctrl.abstain}} abstaining</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t'
 });

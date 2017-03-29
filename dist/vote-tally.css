@@ -1,0 +1,26 @@
+/* Bootstrap additions {{{ */
+.progress-bar.progress-bar-default {
+	background: #CCC;
+}
+
+.alert.alert-default {
+	background: #CCC;
+	color: #666;
+}
+/* }}} */
+
+/* Summary area {{{ */
+.vote-tally > .container {
+	max-width: 700px;
+	margin: 0 auto;
+}
+
+.vote-tally > .container > .col-md-3 {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.vote-tally > .container > .col-md-3 > .alert {
+	padding: 5px;
+}
+/* }}} */
