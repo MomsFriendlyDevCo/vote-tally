@@ -46,6 +46,7 @@ angular
 			};
 
 			// Recalculate targets based on method + changes {{{
+			$scope.winner;
 			$scope.$watchGroup(['$ctrl.method', '$ctrl.approve', '$ctrl.reject', '$ctrl.abstain'], ()=> {
 				var ratio = VoteTally.getWinLose({
 					method: $ctrl.method || '50/50',
@@ -56,6 +57,10 @@ angular
 				$ctrl.settings.approve.target = ratio.toWin;
 				$ctrl.settings.reject.target = ratio.toLose;
 				$ctrl.settings.target.width = ratio.toWin / $ctrl.total * 100;
+
+				$scope.winner = $ctrl.approve >= ratio.toWin ? 'approve'
+					: $ctrl.reject >= ratio.toLose ? 'reject'
+					: null;
 			});
 			// }}}
 
@@ -71,7 +76,8 @@ angular
 			// }}}
 		},
 		template: `
-			<div class="vote-tally">
+			WINNER: {{winner}}
+			<div class="vote-tally" ng-class="{'vote-tally-winner-approve': winner == 'approve', 'vote-tally-winner-reject': winner == 'reject'}">
 				<div class="progress">
 					<div ng-class="$ctrl.settings.approve.class" style="width: {{$ctrl.settings.approve.width}}%" tooltip="{{$ctrl.approve}} in favour" tooltip-show="$ctrl.tooltips=='always' ? true : $ctrl.tooltips=='never' ? false : null" tooltip-position="bottom" tooltip-tether="100"></div>
 					<div ng-class="$ctrl.settings.abstain.class" style="width: {{$ctrl.settings.abstain.width}}%" tooltip="{{$ctrl.abstain}} abstain" tooltip-show="$ctrl.tooltips=='always' ? true : $ctrl.tooltips=='never' ? false : null" tooltip-position="bottom" tooltip-tether="100"></div>

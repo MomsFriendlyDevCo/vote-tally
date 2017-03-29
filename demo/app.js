@@ -5,7 +5,7 @@ angular.module('app', [
 	.controller('demoCtrl', function($scope, VoteTally) {
 		$scope.config = {
 			total: 100,
-			approve: 30,
+			approve: 35,
 			reject: 10,
 			abstain: 5,
 			method: 'simpleMajority',
