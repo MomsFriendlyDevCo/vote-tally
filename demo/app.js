@@ -8,7 +8,7 @@ angular.module('app', [
 			approve: 30,
 			reject: 10,
 			abstain: 5,
-			method: '50/50',
+			method: 'simpleMajority',
 			summary: true,
 			tooltips: 'hover',
 		};

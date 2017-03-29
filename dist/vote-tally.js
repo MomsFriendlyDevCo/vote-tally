@@ -6,7 +6,27 @@ angular.module('angular-ui-vote-tally', []).service('VoteTally', function () {
   * Collection of supported voting methods
   * @var {array}
   */
-		methods: [{ id: '2/3rds', title: 'Two-thirds majority' }, { id: '50/50', title: '50% wins' }],
+		methods: [{
+			id: 'simpleMajority',
+			title: 'Simple Majority',
+			description: '50% + 1 wins'
+		}, {
+			id: '2/3rds',
+			title: 'Two-thirds majority',
+			description: 'FIXME'
+		}, {
+			id: '3/5ths',
+			title: 'Three-fifths majority',
+			description: 'FIXME'
+		}, {
+			id: 'unsc',
+			title: 'UN Security Council (9/14ths)',
+			description: 'Abstentions do not count during calculation'
+		}, {
+			id: 'unanimous',
+			title: 'Unanimous',
+			description: 'All votes must be in favour, none must reject to pass'
+		}],
 
 		/**
   * Calculate Win/Lose ratios for various voting types
@@ -31,9 +51,45 @@ angular.module('angular-ui-vote-tally', []).service('VoteTally', function () {
 						voters: realTotal
 					};
 					break;
-				case '50/50':
+				case '3/5ths':
+					if (realTotal == 0) return { toWin: 0, toLose: 0, voters: 0 };
+					if (realTotal == 1) return { toWin: 1, toLose: 1, voters: 1 };
+					if (realTotal == 2) return { toWin: 2, toLose: 1, voters: 2 };
+					if (realTotal == 3) return { toWin: 3, toLose: 1, voters: 3 };
+					if (realTotal == 4) return { toWin: 3, toLose: 2, voters: 4 };
+
+					var fifth = Math.ceil(realTotal / 5);
 					return {
-						toWin: Math.ceil(realTotal / 2),
+						toWin: fifth * 3 + 1,
+						toLose: fifth * 2,
+						voters: realTotal
+					};
+					break;
+				case 'unsc':
+					realTotal = options.total; // Abstentions are ignored in the UNSC. Total SHOULD also be 14 but we're going to allow for more here
+
+					var segment = Math.ceil(realTotal / 14);
+					return {
+						toWin: segment * 9,
+						toLose: segment * 5,
+						voters: realTotal
+					};
+					break;
+				case 'unanimous':
+					if (realTotal == 0) return { toWin: 0, toLose: 0, voters: 0 };
+
+					return {
+						toWin: realTotal,
+						toLose: 1,
+						voters: realTotal
+					};
+					break;
+				case 'simpleMajority':
+					if (realTotal == 0) return { toWin: 0, toLose: 0, voters: 0 };
+					if (realTotal == 1) return { toWin: 1, toLose: 1, voters: 1 };
+
+					return {
+						toWin: Math.ceil(realTotal / 2) + 1,
 						toLose: Math.ceil(realTotal / 2),
 						voters: realTotal
 					};
