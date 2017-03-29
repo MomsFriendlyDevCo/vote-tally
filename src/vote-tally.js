@@ -123,16 +123,16 @@ angular
 					</div>
 				</div>
 				<div ng-if="$ctrl.summary" class="container row">
-					<div class="col-md-3 text-center">
+					<div class="col-xs-3 text-center">
 						<div ng-class="$ctrl.settings.approve.summaryClass">{{$ctrl.approve}} / {{$ctrl.settings.approve.target}} to pass</div>
 					</div>
-					<div class="col-md-3 text-center">
+					<div class="col-xs-3 text-center">
 						<div ng-class="$ctrl.settings.reject.summaryClass">{{$ctrl.reject}} / {{$ctrl.settings.reject.target}} to reject</div>
 					</div>
-					<div class="col-md-3 text-center">
+					<div class="col-xs-3 text-center">
 						<div ng-class="$ctrl.settings.waiting.summaryClass">{{$ctrl.settings.waiting.count}} to vote</div>
 					</div>
-					<div class="col-md-3 text-center">
+					<div class="col-xs-3 text-center">
 						<div ng-class="$ctrl.settings.abstain.summaryClass">{{$ctrl.abstain}} abstaining</div>
 					</div>
 				</div>

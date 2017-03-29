@@ -53,12 +53,12 @@
 	margin: 0 auto;
 }
 
-.vote-tally > .container > .col-md-3 {
+.vote-tally > .container > div {
 	padding-left: 5px;
 	padding-right: 5px;
 }
 
-.vote-tally > .container > .col-md-3 > .alert {
+.vote-tally > .container > div > .alert {
 	padding: 5px;
 }
 /* }}} */
