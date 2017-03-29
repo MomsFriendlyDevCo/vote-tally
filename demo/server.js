@@ -28,8 +28,8 @@ app.get('/app.js', function(req, res) {
 	res.sendFile('app.js', {root: root + '/demo'});
 });
 
-app.get('/vote-tally.dirv.js', function(req, res) {
-	res.sendFile('vote-tally.dirv.js', {root: root + '/src'});
+app.get('/vote-tally.js', function(req, res) {
+	res.sendFile('vote-tally.js', {root: root + '/src'});
 });
 
 app.use(function(err, req, res, next){
