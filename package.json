@@ -35,11 +35,12 @@
     "gulp-clean-css": "^3.0.4",
     "gulp-ng-annotate": "^2.0.0",
     "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^2.1.2",
-    "jquery": "^3.2.1"
+    "gulp-uglify": "^2.1.2"
   },
   "dependencies": {
-    "@momsfriendlydevco/angular-bs-tooltip": "^1.1.0",
-    "angular": "^1.6.3"
+    "@momsfriendlydevco/angular-bs-tooltip": "^1.2.3",
+    "angular": "^1.6.3",
+    "jquery": "^3.2.1",
+    "tether": "^1.4.0"
   }
 }

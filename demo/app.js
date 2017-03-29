@@ -10,6 +10,7 @@ angular.module('app', [
 			abstain: 5,
 			method: '50/50',
 			summary: true,
+			tooltips: 'always',
 		};
 		$scope.methods = VoteTally.methods;
 	})
