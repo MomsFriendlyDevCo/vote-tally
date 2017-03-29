@@ -76,7 +76,6 @@ angular
 			// }}}
 		},
 		template: `
-			WINNER: {{winner}}
 			<div class="vote-tally" ng-class="{'vote-tally-winner-approve': winner == 'approve', 'vote-tally-winner-reject': winner == 'reject'}">
 				<div class="progress">
 					<div ng-class="$ctrl.settings.approve.class" style="width: {{$ctrl.settings.approve.width}}%" tooltip="{{$ctrl.approve}} in favour" tooltip-show="$ctrl.tooltips=='always' ? true : $ctrl.tooltips=='never' ? false : null" tooltip-position="bottom" tooltip-tether="100"></div>
