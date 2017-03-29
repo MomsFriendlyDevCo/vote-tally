@@ -3,6 +3,15 @@ angular
 	.service('VoteTally', function() {
 		return {
 			/**
+			* Collection of supported voting methods
+			* @var {array}
+			*/
+			methods: [
+				{id: '2/3rds', title: 'Two-thirds majority'},
+				{id: '50/50', title: '50% wins'},
+			],
+
+			/**
 			* Calculate Win/Lose ratios for various voting types
 			* @param {Object} options Options to use
 			* @param {number} options.total The total number of votes
@@ -105,16 +114,16 @@ angular
 				<div ng-class="$ctrl.settings.reject.class" style="width: {{$ctrl.settings.reject.width}}%" tooltip="{{$ctrl.reject}} reject" tooltip-position="bottom" tooltip-show="true"></div>
 			</div>
 			<div ng-if="$ctrl.summary" class="container row">
-				<div class="col-md-3">
+				<div class="col-md-3 text-center">
 					<div ng-class="$ctrl.settings.approve.summaryClass">{{$ctrl.approve}} / {{$ctrl.settings.approve.target}} to pass</div>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-3 text-center">
 					<div ng-class="$ctrl.settings.reject.summaryClass">{{$ctrl.reject}} / {{$ctrl.settings.reject.target}} to reject</div>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-3 text-center">
 					<div ng-class="$ctrl.settings.waiting.summaryClass">{{$ctrl.settings.waiting.count}} to vote</div>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-3 text-center">
 					<div ng-class="$ctrl.settings.abstain.summaryClass">{{$ctrl.abstain}} abstaining</div>
 				</div>
 			</div>

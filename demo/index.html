@@ -30,6 +30,7 @@
 
 	<style>
 	.m-t-20 {margin-top: 20px}
+	.m-t-50 {margin-top: 50px}
 	.p-t-20 {padding-top: 20px}
 	</style>
 </head>
@@ -39,5 +40,54 @@
 		<vote-tally total="100" approve="40" reject="20" abstain="10" method="2/3rds" summary="true"></vote-tally>
 
 		<pre class="m-t-20">&lt;vote-tally total="100" approve="40" reject="20" abstain="10" method="2/3rds" summary="true"&gt;&lt;/vote-tally&gt;
+	</div>
+
+	<div class="container m-t-50">
+		<legend>Configurable demo</legend>
+		<vote-tally total="config.total" approve="config.approve" reject="config.reject" abstain="config.abstain" method="{{config.method}}" summary="config.summary"></vote-tally>
+
+		<form class="form-horizontal">
+			<div class="form-group">
+				<label class="col-sm-3 control-label">Total participents</label>
+				<div class="col-sm-9">
+					<input ng-model="config.total" type="number" min="1" class="form-control"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">Approval votes</label>
+				<div class="col-sm-9">
+					<input ng-model="config.approve" type="number" min="1" max="{{config.total}}" class="form-control"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">Rejection votes</label>
+				<div class="col-sm-9">
+					<input ng-model="config.reject" type="number" min="0" max="{{config.total}}" class="form-control"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">Abstention votes</label>
+				<div class="col-sm-9">
+					<input ng-model="config.abstain" type="number" min="1" max="{{config.total}}" class="form-control"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">Voting method</label>
+				<div class="col-sm-9">
+					<select ng-model="config.method" class="form-control">
+						<option ng-repeat="method in methods track by method.id" value="{{method.id}}">{{method.title}}</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label"></label>
+				<div class="col-sm-9">
+					<div class="checkbox">
+						<label><input ng-model="config.summary" type="checkbox"> Show summary</label>
+					</div>
+				</div>
+			</div>
+		</form>
+		<pre class="m-t-20">&lt;vote-tally total="{{config.total}}" approve="{{config.approve}}" reject="{{config.reject}}" abstain="{{config.abstain}}" method="{{config.method}}" summary="{{config.summary}}"&gt;&lt;/vote-tally&gt;
 	</div>
 </body>
