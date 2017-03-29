@@ -28,12 +28,12 @@ app.get('/app.js', function(req, res) {
 	res.sendFile('app.js', {root: root + '/demo'});
 });
 
-app.get('/vote-tally.js', function(req, res) {
-	res.sendFile('vote-tally.js', {root: root + '/src'});
+app.get('/dist/vote-tally.js', function(req, res) {
+	res.sendFile('vote-tally.js', {root: root + '/dist'});
 });
 
-app.get('/vote-tally.css', function(req, res) {
-	res.sendFile('vote-tally.css', {root: root + '/src'});
+app.get('/dist/vote-tally.css', function(req, res) {
+	res.sendFile('vote-tally.css', {root: root + '/dist'});
 });
 
 app.use(function(err, req, res, next){
