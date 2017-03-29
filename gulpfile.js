@@ -9,6 +9,7 @@ var rename = require('gulp-rename');
 var replace = require('gulp-replace');
 var nodemon = require('gulp-nodemon');
 var uglify = require('gulp-uglify');
+var rimraf = require('rimraf');
 var watch = require('gulp-watch');
 
 gulp.task('default', ['build']);
@@ -85,3 +86,32 @@ gulp.task('css:min', ()=>
 		.pipe(cleanCSS())
 		.pipe(gulp.dest('./dist'))
 );
+
+
+gulp.task('gh-pages', ['build'], function() {
+	rimraf.sync('./gh-pages');
+
+	return gulp.src([
+		'./LICENSE',
+		'./demo/app.js',
+		'./demo/index.html',
+		'./dist/**/*',
+		'./node_modules/angular/angular.min.js',
+		'./node_modules/@momsfriendlydevco/angular-bs-tooltip/dist/angular-bs-tooltip.min.js',
+		'./node_modules/bootstrap/dist/css/bootstrap.min.css',
+		'./node_modules/bootstrap/dist/js/bootstrap.min.js',
+		'./node_modules/font-awesome/css/font-awesome.min.css',
+		'./node_modules/font-awesome/fonts/fontawesome-webfont.ttf',
+		'./node_modules/font-awesome/fonts/fontawesome-webfont.woff',
+		'./node_modules/font-awesome/fonts/fontawesome-webfont.woff2',
+		'./node_modules/jquery/dist/jquery.min.js',
+		'./node_modules/tether/dist/js/tether.min.js',
+	], {base: __dirname})
+		.pipe(rename(function(path) {
+			if (path.dirname == 'demo') { // Move all demo files into root
+				path.dirname = '.';
+			}
+			return path;
+		}))
+		.pipe(gulp.dest('./gh-pages'))
+});

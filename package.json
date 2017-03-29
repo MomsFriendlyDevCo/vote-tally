@@ -48,6 +48,7 @@
     "@momsfriendlydevco/angular-bs-tooltip": "^1.2.3",
     "angular": "^1.6.3",
     "jquery": "^3.2.1",
+    "rimraf": "^2.6.1",
     "tether": "^1.4.0"
   }
 }
