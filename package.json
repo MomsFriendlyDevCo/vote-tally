@@ -4,7 +4,8 @@
   "description": "Angular directive to show vote totals - accepted, rejected, abstaining, totals etc.",
   "main": "index.js",
   "scripts": {
-    "serve": "node demo/server.js"
+    "serve": "node demo/server.js",
+    "prepublish": "gulp build"
   },
   "repository": {
     "type": "git",
