@@ -16,6 +16,9 @@
     "tally"
   ],
   "author": "Matt Carter <m@ttcarter.com>",
+  "contributors": [
+    "Adam Gian (https://github.com/adamgian)"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/MomsFriendlyDevCo/vote-tally/issues"
