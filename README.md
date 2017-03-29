@@ -2,6 +2,8 @@ vote-tally
 ==========
 Simple UI widget to show and calculate vote tallies.
 
+![Screenshot](./docs/shot.png)
+
 
 Installation
 ------------
