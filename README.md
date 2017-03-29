@@ -15,10 +15,11 @@ npm install --save @momsfriendlydevco/vote-tally
 ```
 
 
-2. Install the required script somewhere in your build chain or include it in a HTML header:
+2. Install the required script + CSS somewhere in your build chain or include it in a HTML header:
 
 ```html
 <script src="/libs/vote-tally/src/votetally.min.js"/>
+<link href="/libs/vote-tally/vote-tally.min.css" rel="stylesheet" type="text/css"/>
 ```
 
 
@@ -34,3 +35,6 @@ var app = angular.module('app', ['angular-ui-vote-tally'])
 ```html
 <vote-tally total="100" approve="40" reject="20" abstain="10" method="2/3rds" summary="true"></vote-tally>
 ```
+
+
+A demo is also available. To use this [follow the instructions in the demo directory](./demo/README.md).
