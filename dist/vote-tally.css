@@ -9,18 +9,56 @@
 }
 /* }}} */
 
+/* Target dotted line {{{ */
+.vote-tally > .progress {
+	overflow: visible;
+}
+
+.vote-tally .vote-tally-target {
+	position: relative;
+	border-right: 1px dashed #000;
+	height: 40px;
+	left: 0;
+	right: 0;
+	top: -10px;
+	bottom: 10px;
+	transition: width .6s ease; /* Same as Bootstrap progress-bars for the smooth alteration effect */
+}
+
+.vote-tally .vote-tally-target-arrow-up {
+	position: absolute;
+	right: -5px;
+	bottom: 0;
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 5px solid #000;
+}
+
+.vote-tally .vote-tally-target-arrow-down {
+	position: absolute;
+	right: -5px;
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-top: 5px solid #000;
+}
+/* }}} */
+
 /* Summary area {{{ */
 .vote-tally > .container {
 	max-width: 700px;
 	margin: 0 auto;
 }
 
-.vote-tally > .container > .col-md-3 {
+.vote-tally > .container > div {
 	padding-left: 5px;
 	padding-right: 5px;
 }
 
-.vote-tally > .container > .col-md-3 > .alert {
+.vote-tally > .container > div > .alert {
 	padding: 5px;
 }
 /* }}} */
