@@ -118,6 +118,5 @@ angular
 					<div ng-class="$ctrl.settings.abstain.summaryClass">{{$ctrl.abstain}} abstaining</div>
 				</div>
 			</div>
-			<pre>{{$ctrl | json}}</pre>
 		`,
 	});
