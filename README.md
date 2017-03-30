@@ -42,3 +42,75 @@ var app = angular.module('app', ['angular-ui-vote-tally'])
 
 
 A demo is also available. To use this [follow the instructions in the demo directory](./demo/README.md).
+
+
+API
+===
+vote-tally exposes two main components: a generic service library which provides a list of voting schemas supported and information on voting methods and the UI component itself.
+
+Within Node the API is accessed as an object:
+
+```javascript
+var voteTally = require('@momsfriendlydevco/vote-tally');
+
+// Calculate 2/3rds majority voting method with 100 people and 10 abstaining
+var ratio = voteTally.getWinLose({
+	method: '2/3rds',
+	total: 100,
+	abstain: 10,
+});
+```
+
+Within AngularJS this is accessed as a service:
+
+```javascript
+angular
+	.module('app')
+	.component('myController', {
+		controller: function(VoteTally) {
+			VoteTally.getWinLose(...);
+		},
+	});
+```
+
+methods
+-------
+An array of objects for all supported voting methods.
+Each item will contain an `id` as well as a human readable `title` and a brief `description`.
+
+
+getWinLose()
+------------
+Calculate the ratios for a given voting method given the total number of voters and an optional number of voters abstaining.
+
+
+```javascript
+// Calculate 2/3rds majority voting method with 100 people and 10 abstaining
+var ratio = voteTally.getWinLose({
+	method: '2/3rds',
+	total: 100,
+	abstain: 10,
+});
+```
+
+
+UI Component
+------------
+The UI widget is a AngularJS component which is declared as:
+
+```html
+<vote-tally total="100" approve="30" reject="20" abstain="5" method="simpleMajority" summary="true" tooltips="hover"></vote-tally>
+```
+
+The following options are accepted:
+
+| Option     | Type      | Default            | Description                                                                                                    |
+|------------|-----------|--------------------|----------------------------------------------------------------------------------------------------------------|
+| `method`   | `string`  | `"simpleMajority"` | The voting method used to calculate the target votes. This can be any ID supported in the `methods` collection |
+| `total`    | `number`  | `100`              | The total number of voters                                                                                     |
+| `approve`  | `number`  | `0`                | The number of voters who accept the motion                                                                     |
+| `reject`   | `number`  | `0`                | The number of voters who reject the motion                                                                     |
+| `abstain`  | `number`  | `0`                | The number of voters who are abstaining                                                                        |
+| `summary`  | `boolean` | `false`            | Whether to show the summary area at the bottom of the widget                                                   |
+| `tooltips` | `string`  | `"hover"`          | When to display tooltips. Values supported: `"never"`, `"hover"` (default), `"always"`                         |
+

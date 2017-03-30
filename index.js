@@ -34,8 +34,8 @@ module.exports = {
 	/**
 	* Calculate Win/Lose ratios for various voting types
 	* @param {Object} options Options to use
-	* @param {number} options.total The total number of votes
 	* @param {string} options.method The vote method to use (see code for valid types)
+	* @param {number} options.total The total number of votes
 	* @param {number} options.abstain Optional number of the number of abstentions
 	* @return {Object} New structure containing voters, toWin, toLose
 	*/

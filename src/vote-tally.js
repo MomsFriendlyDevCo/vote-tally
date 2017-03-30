@@ -7,12 +7,12 @@ angular
 	})
 	.component('voteTally', {
 		bindings: {
+			method: '@',
 			total: '<',
 			approve: '<',
 			reject: '<',
 			abstain: '<',
 			summary: '<',
-			method: '@',
 			tooltips: '<',
 		},
 		controller: function($scope, VoteTally) {
@@ -49,7 +49,7 @@ angular
 			$scope.winner;
 			$scope.$watchGroup(['$ctrl.method', '$ctrl.approve', '$ctrl.reject', '$ctrl.abstain'], ()=> {
 				var ratio = VoteTally.getWinLose({
-					method: $ctrl.method || '50/50',
+					method: $ctrl.method || 'simpleMajority',
 					total: $ctrl.total,
 					abstain: $ctrl.abstain,
 				});
