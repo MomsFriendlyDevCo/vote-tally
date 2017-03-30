@@ -4,6 +4,8 @@ Simple UI widget to show and calculate vote tallies.
 
 ![Screenshot](./docs/shot.png)
 
+[Demo](https://momsfriendlydevco.github.io/vote-tally)
+
 
 Installation
 ------------
