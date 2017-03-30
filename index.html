@@ -39,15 +39,7 @@
 	</style>
 </head>
 <body ng-app="app" ng-controller="demoCtrl">
-	<div class="container p-t-20">
-		<legend>Simple example</legend>
-		<vote-tally total="100" approve="40" reject="20" abstain="10" method="2/3rds" summary="true"></vote-tally>
-
-		<pre class="m-t-20">&lt;vote-tally total="100" approve="40" reject="20" abstain="10" method="2/3rds" summary="true"&gt;&lt;/vote-tally&gt;
-	</div>
-
 	<div class="container m-t-50">
-		<legend>Configurable demo</legend>
 		<vote-tally total="config.total" approve="config.approve" reject="config.reject" abstain="config.abstain" method="{{config.method}}" summary="config.summary" tooltips="config.tooltips"></vote-tally>
 
 		<form class="form-horizontal">
