@@ -2,6 +2,7 @@ var _ = require('lodash');
 var annotate = require('gulp-ng-annotate');
 var babel = require('gulp-babel');
 var cleanCSS = require('gulp-clean-css');
+var ghPages = require('gulp-gh-pages');
 var gulp = require('gulp');
 var fs = require('fs');
 var lodash = require('lodash');
@@ -93,6 +94,7 @@ gulp.task('gh-pages', ['build'], function() {
 
 	return gulp.src([
 		'./LICENSE',
+		'./demo/_config.yml',
 		'./demo/app.js',
 		'./demo/index.html',
 		'./dist/**/*',
@@ -113,5 +115,9 @@ gulp.task('gh-pages', ['build'], function() {
 			}
 			return path;
 		}))
-		.pipe(gulp.dest('./gh-pages'))
+		.pipe(ghPages({
+			cacheDir: 'gh-pages',
+			push: true, // Change to false for dryrun (files dumped to cacheDir)
+			// force: true, // Required to include node_modules files even though they are in .gitignore
+		}))
 });
