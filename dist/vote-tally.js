@@ -101,7 +101,7 @@ angular.module('angular-ui-vote-tally', []).service('VoteTally', function () {
 	};
 }).component('voteTally', {
 	bindings: {
-		method: '@',
+		method: '<',
 		total: '<',
 		approve: '<',
 		reject: '<',

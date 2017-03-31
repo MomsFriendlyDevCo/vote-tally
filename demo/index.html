@@ -40,7 +40,7 @@
 </head>
 <body ng-app="app" ng-controller="demoCtrl">
 	<div class="container m-t-50">
-		<vote-tally total="config.total" approve="config.approve" reject="config.reject" abstain="config.abstain" method="{{config.method}}" summary="config.summary" tooltips="config.tooltips"></vote-tally>
+		<vote-tally method="config.method" total="config.total" approve="config.approve" reject="config.reject" abstain="config.abstain" summary="config.summary" tooltips="config.tooltips"></vote-tally>
 
 		<form class="form-horizontal">
 			<div class="form-group">
@@ -94,6 +94,6 @@
 				</div>
 			</div>
 		</form>
-		<pre class="m-t-20">&lt;vote-tally total="{{config.total}}" approve="{{config.approve}}" reject="{{config.reject}}" abstain="{{config.abstain}}" method="{{config.method}}" summary="{{config.summary}}" tooltips="{{config.tooltips}}"&gt;&lt;/vote-tally&gt;
+		<pre class="m-t-20">&lt;vote-tally total="{{config.total}}" approve="{{config.approve}}" reject="{{config.reject}}" abstain="{{config.abstain}}" method="'{{config.method}}'" summary="{{config.summary}}" tooltips="{{config.tooltips}}"&gt;&lt;/vote-tally&gt;
 	</div>
 </body>

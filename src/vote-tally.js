@@ -7,7 +7,7 @@ angular
 	})
 	.component('voteTally', {
 		bindings: {
-			method: '@',
+			method: '<',
 			total: '<',
 			approve: '<',
 			reject: '<',
