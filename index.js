@@ -7,22 +7,22 @@ module.exports = {
 		{
 			id: 'simpleMajority',
 			title: 'Simple Majority',
-			description: '50% + 1 wins',
+			description: 'Voting method employed on non-substantive matters in the UN - 50% + 1 vote passes',
 		},
 		{
 			id: '2/3rds',
 			title: 'Two-thirds majority',
-			description: 'FIXME',
+			description: 'The common voting ratio used for substantive matters in the UN',
 		},
 		{
 			id: '3/5ths',
 			title: 'Three-fifths majority',
-			description: 'FIXME',
+			description: 'Used by UN Youth Australia (UNYA) in the Model United Nations competition',
 		},
 		{
 			id: 'unsc',
 			title: 'UN Security Council (9/14ths)',
-			description: 'Abstentions do not count during calculation',
+			description: 'Used by the UN Security Council in - abstentions do not count during vote counts',
 		},
 		{
 			id: 'unanimous',
