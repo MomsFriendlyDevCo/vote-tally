@@ -71,10 +71,10 @@ module.exports = {
 			case 'unsc':
 				realTotal = options.total; // Abstentions are ignored in the UNSC. Total SHOULD also be 14 but we're going to allow for more here
 
-				var segment = Math.ceil(realTotal / 14);
+				var segment = realTotal / 14;
 				return {
-					toWin: segment * 9,
-					toLose: segment * 5,
+					toWin: Math.ceil(segment * 9),
+					toLose: Math.ceil(segment * 5),
 					voters: realTotal,
 				};
 				break;
