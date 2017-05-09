@@ -40,7 +40,19 @@
 </head>
 <body ng-app="app" ng-controller="demoCtrl">
 	<div class="container m-t-50">
-		<vote-tally method="config.method" total="config.total" approve="config.approve" reject="config.reject" abstain="config.abstain" summary="config.summary" tooltips="config.tooltips"></vote-tally>
+		<vote-tally
+			method="config.method"
+			total="config.total"
+			approve="config.approve"
+			reject="config.reject"
+			abstain="config.abstain"
+			summary="config.summary"
+			tooltips="config.tooltips"
+			on-click-pass="log('Clicked pass')"
+			on-click-reject="log('Clicked reject')"
+			on-click-waiting="log('Clicked waiting')"
+			on-click-abstain="log('Clicked abstain')"
+		></vote-tally>
 
 		<form class="form-horizontal">
 			<div class="form-group">

@@ -20,4 +20,6 @@ angular.module('app', [
 			$scope.methodDescription = $scope.methods.find(m => m.id == $scope.config.method).description;
 		});
 		// }}}
+
+		$scope.log = msg => console.log(msg);
 	})

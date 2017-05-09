@@ -104,13 +104,17 @@ The UI widget is a AngularJS component which is declared as:
 
 The following options are accepted:
 
-| Option     | Type      | Default            | Description                                                                                                    |
-|------------|-----------|--------------------|----------------------------------------------------------------------------------------------------------------|
-| `method`   | `string`  | `"simpleMajority"` | The voting method used to calculate the target votes. This can be any ID supported in the `methods` collection |
-| `total`    | `number`  | `100`              | The total number of voters                                                                                     |
-| `approve`  | `number`  | `0`                | The number of voters who accept the motion                                                                     |
-| `reject`   | `number`  | `0`                | The number of voters who reject the motion                                                                     |
-| `abstain`  | `number`  | `0`                | The number of voters who are abstaining                                                                        |
-| `summary`  | `boolean` | `false`            | Whether to show the summary area at the bottom of the widget                                                   |
-| `tooltips` | `string`  | `"hover"`          | When to display tooltips. Values supported: `"never"`, `"hover"` (default), `"always"`                         |
+| Option           | Type       | Default            | Description                                                                                                           |
+|------------------|------------|--------------------|-----------------------------------------------------------------------------------------------------------------------|
+| `method`         | `string`   | `"simpleMajority"` | The voting method used to calculate the target votes. This can be any ID supported in the `methods` collection        |
+| `total`          | `number`   | `100`              | The total number of voters                                                                                            |
+| `approve`        | `number`   | `0`                | The number of voters who accept the motion                                                                            |
+| `reject`         | `number`   | `0`                | The number of voters who reject the motion                                                                            |
+| `abstain`        | `number`   | `0`                | The number of voters who are abstaining                                                                               |
+| `summary`        | `boolean`  | `false`            | Whether to show the summary area at the bottom of the widget                                                          |
+| `tooltips`       | `string`   | `"hover"`          | When to display tooltips. Values supported: `"never"`, `"hover"` (default), `"always"`                                |
+| `onClickPass`    | `function` | `undefined`        | A function to fire when the user clicks on the `X / Y to pass` summary pane or the far left progress bar              |
+| `onClickReject`  | `function` | `undefined`        | A function to fire when the user clicks on the `X / Y to reject` summary pane or the second to far right progress bar |
+| `onClickAbstain` | `function` | `undefined`        | A function to fire when the user clicks on the `X abstaining` summary pane or the far right progress bar              |
+| `onClickWaiting` | `function` | `undefined`        | A function to fire when the user clicks on the `X to vote` summary pane or the remaining area of the progress bar     |
 

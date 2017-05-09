@@ -14,6 +14,10 @@ angular
 			abstain: '<',
 			summary: '<',
 			tooltips: '<',
+			onClickPass: '&?',
+			onClickReject: '&?',
+			onClickWaiting: '&?',
+			onClickAbstain: '&?',
 		},
 		controller: function($scope, VoteTally) {
 			var $ctrl = this;
@@ -74,29 +78,36 @@ angular
 				$ctrl.settings.waiting.width = $ctrl.settings.waiting.count / $ctrl.total * 100;
 			});
 			// }}}
+
+			// Handle events {{{
+			$ctrl.fire = handle => {
+				if (!$ctrl[handle]) return; // No handler
+				$ctrl[handle]();
+			};
+			// }}}
 		},
 		template: `
 			<div class="vote-tally" ng-class="{'vote-tally-winner-approve': winner == 'approve', 'vote-tally-winner-reject': winner == 'reject'}">
 				<div class="progress">
-					<div ng-class="$ctrl.settings.approve.class" style="width: {{$ctrl.settings.approve.width}}%" tooltip="{{$ctrl.approve}} in favour" tooltip-show="$ctrl.tooltips=='always' ? true : $ctrl.tooltips=='never' ? false : null" tooltip-position="bottom" tooltip-tether="100"></div>
-					<div ng-class="$ctrl.settings.abstain.class" style="width: {{$ctrl.settings.abstain.width}}%" tooltip="{{$ctrl.abstain}} abstain" tooltip-show="$ctrl.tooltips=='always' ? true : $ctrl.tooltips=='never' ? false : null" tooltip-position="bottom" tooltip-tether="100"></div>
-					<div ng-class="$ctrl.settings.reject.class" style="width: {{$ctrl.settings.reject.width}}%" tooltip="{{$ctrl.reject}} reject" tooltip-show="$ctrl.tooltips=='always' ? true : $ctrl.tooltips=='never' ? false : null" tooltip-position="bottom" tooltip-tether="100"></div>
+					<div ng-click="$ctrl.fire('onClickPass')" ng-class="$ctrl.settings.approve.class" style="width: {{$ctrl.settings.approve.width}}%; {{$ctrl.onClickPass && 'cursor: pointer'}}" tooltip="{{$ctrl.approve}} in favour" tooltip-show="$ctrl.tooltips=='always' ? true : $ctrl.tooltips=='never' ? false : null" tooltip-position="bottom" tooltip-tether="100"></div>
+					<div ng-click="$ctrl.fire('onClickAbstain')" ng-class="$ctrl.settings.abstain.class" style="width: {{$ctrl.settings.abstain.width}}%; {{$ctrl.onClickAbstain && 'cursor: pointer'}}" tooltip="{{$ctrl.abstain}} abstain" tooltip-show="$ctrl.tooltips=='always' ? true : $ctrl.tooltips=='never' ? false : null" tooltip-position="bottom" tooltip-tether="100"></div>
+					<div ng-click="$ctrl.fire('onClickReject')" ng-class="$ctrl.settings.reject.class" style="width: {{$ctrl.settings.reject.width}}%; {{$ctrl.onClickReject && 'cursor: pointer'}}" tooltip="{{$ctrl.reject}} reject" tooltip-show="$ctrl.tooltips=='always' ? true : $ctrl.tooltips=='never' ? false : null" tooltip-position="bottom" tooltip-tether="100"></div>
 					<div class="vote-tally-target" style="width: {{$ctrl.settings.target.width}}%">
 						<div class="vote-tally-target-arrow-down"></div>
 						<div class="vote-tally-target-arrow-up"></div>
 					</div>
 				</div>
 				<div ng-if="$ctrl.summary" class="container row">
-					<div class="col-xs-3 text-center">
+					<div ng-click="$ctrl.fire('onClickPass')" class="col-xs-3 text-center" style="{{$ctrl.onClickPass && 'cursor: pointer'}}">
 						<div ng-class="$ctrl.settings.approve.summaryClass">{{$ctrl.approve}} / {{$ctrl.settings.approve.target}} to pass</div>
 					</div>
-					<div class="col-xs-3 text-center">
+					<div ng-click="$ctrl.fire('onClickReject')" class="col-xs-3 text-center" style="{{$ctrl.onClickReject && 'cursor: pointer'}}">
 						<div ng-class="$ctrl.settings.reject.summaryClass">{{$ctrl.reject}} / {{$ctrl.settings.reject.target}} to reject</div>
 					</div>
-					<div class="col-xs-3 text-center">
+					<div ng-click="$ctrl.fire('onClickWaiting')" class="col-xs-3 text-center" style="{{$ctrl.onClickWaiting && 'cursor: pointer'}}">
 						<div ng-class="$ctrl.settings.waiting.summaryClass">{{$ctrl.settings.waiting.count}} to vote</div>
 					</div>
-					<div class="col-xs-3 text-center">
+					<div ng-click="$ctrl.fire('onClickAbstain')" class="col-xs-3 text-center" style="{{$ctrl.onClickAbstain && 'cursor: pointer'}}">
 						<div ng-class="$ctrl.settings.abstain.summaryClass">{{$ctrl.abstain}} abstaining</div>
 					</div>
 				</div>
