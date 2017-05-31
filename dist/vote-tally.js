@@ -44,10 +44,10 @@ angular.module('angular-ui-vote-tally', []).service('VoteTally', function () {
 					if (realTotal == 1) return { toWin: 1, toLose: 1, voters: 1 };
 					if (realTotal == 2) return { toWin: 2, toLose: 1, voters: 2 };
 
-					var third = Math.floor(realTotal / 3);
+					var third = realTotal / 3;
 					return {
-						toWin: third * 2,
-						toLose: third * 1 + 1,
+						toWin: Math.ceil(third * 2),
+						toLose: Math.floor(third) * 1 + 1,
 						voters: realTotal
 					};
 					break;
@@ -55,13 +55,13 @@ angular.module('angular-ui-vote-tally', []).service('VoteTally', function () {
 					if (realTotal == 0) return { toWin: 0, toLose: 0, voters: 0 };
 					if (realTotal == 1) return { toWin: 1, toLose: 1, voters: 1 };
 					if (realTotal == 2) return { toWin: 2, toLose: 1, voters: 2 };
-					if (realTotal == 3) return { toWin: 3, toLose: 1, voters: 3 };
+					if (realTotal == 3) return { toWin: 2, toLose: 2, voters: 3 };
 					if (realTotal == 4) return { toWin: 3, toLose: 2, voters: 4 };
 
 					var fifth = Math.ceil(realTotal / 5);
 					return {
-						toWin: fifth * 3 + 1,
-						toLose: fifth * 2,
+						toWin: fifth * 3,
+						toLose: fifth * 2 + 1,
 						voters: realTotal
 					};
 					break;
@@ -87,10 +87,15 @@ angular.module('angular-ui-vote-tally', []).service('VoteTally', function () {
 				case 'simpleMajority':
 					if (realTotal == 0) return { toWin: 0, toLose: 0, voters: 0 };
 					if (realTotal == 1) return { toWin: 1, toLose: 1, voters: 1 };
+					if (realTotal == 2) return { toWin: 2, toLose: 1, voters: 2 };
+					if (realTotal == 3) return { toWin: 3, toLose: 2, voters: 3 };
 
+					// FIXME: Confirm voting logic -- specifically, how to deal with odd totals?
+					var isTotalOdd = realTotal % 2 == 1;
+					var nearestEven = 2 * Math.round(realTotal / 2);
 					return {
 						toWin: Math.ceil(realTotal / 2) + 1,
-						toLose: Math.ceil(realTotal / 2),
+						toLose: isTotalOdd ? nearestEven / 2 - 1 : Math.ceil(realTotal / 2), // For odd totals, round up to nearest even, half it, and subtract 1.
 						voters: realTotal
 					};
 					break;
@@ -107,7 +112,11 @@ angular.module('angular-ui-vote-tally', []).service('VoteTally', function () {
 		reject: '<',
 		abstain: '<',
 		summary: '<',
-		tooltips: '<'
+		tooltips: '<',
+		onClickPass: '&?',
+		onClickReject: '&?',
+		onClickWaiting: '&?',
+		onClickAbstain: '&?'
 	},
 	controller: ["$scope", "VoteTally", function controller($scope, VoteTally) {
 		var $ctrl = this;
@@ -167,6 +176,13 @@ angular.module('angular-ui-vote-tally', []).service('VoteTally', function () {
 			$ctrl.settings.waiting.width = $ctrl.settings.waiting.count / $ctrl.total * 100;
 		});
 		// }}}
+
+		// Handle events {{{
+		$ctrl.fire = function (handle) {
+			if (!$ctrl[handle]) return; // No handler
+			$ctrl[handle]();
+		};
+		// }}}
 	}],
-	template: '\n\t\t\t<div class="vote-tally" ng-class="{\'vote-tally-winner-approve\': winner == \'approve\', \'vote-tally-winner-reject\': winner == \'reject\'}">\n\t\t\t\t<div class="progress">\n\t\t\t\t\t<div ng-class="$ctrl.settings.approve.class" style="width: {{$ctrl.settings.approve.width}}%" tooltip="{{$ctrl.approve}} in favour" tooltip-show="$ctrl.tooltips==\'always\' ? true : $ctrl.tooltips==\'never\' ? false : null" tooltip-position="bottom" tooltip-tether="100"></div>\n\t\t\t\t\t<div ng-class="$ctrl.settings.abstain.class" style="width: {{$ctrl.settings.abstain.width}}%" tooltip="{{$ctrl.abstain}} abstain" tooltip-show="$ctrl.tooltips==\'always\' ? true : $ctrl.tooltips==\'never\' ? false : null" tooltip-position="bottom" tooltip-tether="100"></div>\n\t\t\t\t\t<div ng-class="$ctrl.settings.reject.class" style="width: {{$ctrl.settings.reject.width}}%" tooltip="{{$ctrl.reject}} reject" tooltip-show="$ctrl.tooltips==\'always\' ? true : $ctrl.tooltips==\'never\' ? false : null" tooltip-position="bottom" tooltip-tether="100"></div>\n\t\t\t\t\t<div class="vote-tally-target" style="width: {{$ctrl.settings.target.width}}%">\n\t\t\t\t\t\t<div class="vote-tally-target-arrow-down"></div>\n\t\t\t\t\t\t<div class="vote-tally-target-arrow-up"></div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t\t<div ng-if="$ctrl.summary" class="container row">\n\t\t\t\t\t<div class="col-xs-3 text-center">\n\t\t\t\t\t\t<div ng-class="$ctrl.settings.approve.summaryClass">{{$ctrl.approve}} / {{$ctrl.settings.approve.target}} to pass</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class="col-xs-3 text-center">\n\t\t\t\t\t\t<div ng-class="$ctrl.settings.reject.summaryClass">{{$ctrl.reject}} / {{$ctrl.settings.reject.target}} to reject</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class="col-xs-3 text-center">\n\t\t\t\t\t\t<div ng-class="$ctrl.settings.waiting.summaryClass">{{$ctrl.settings.waiting.count}} to vote</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class="col-xs-3 text-center">\n\t\t\t\t\t\t<div ng-class="$ctrl.settings.abstain.summaryClass">{{$ctrl.abstain}} abstaining</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t'
+	template: '\n\t\t\t<div class="vote-tally" ng-class="{\'vote-tally-winner-approve\': winner == \'approve\', \'vote-tally-winner-reject\': winner == \'reject\'}">\n\t\t\t\t<div class="progress">\n\t\t\t\t\t<div ng-click="$ctrl.fire(\'onClickPass\')" ng-class="$ctrl.settings.approve.class" style="width: {{$ctrl.settings.approve.width}}%; {{$ctrl.onClickPass && \'cursor: pointer\'}}" tooltip="{{$ctrl.approve}} in favour" tooltip-show="$ctrl.tooltips==\'always\' ? true : $ctrl.tooltips==\'never\' ? false : null" tooltip-position="bottom" tooltip-tether="100"></div>\n\t\t\t\t\t<div ng-click="$ctrl.fire(\'onClickAbstain\')" ng-class="$ctrl.settings.abstain.class" style="width: {{$ctrl.settings.abstain.width}}%; {{$ctrl.onClickAbstain && \'cursor: pointer\'}}" tooltip="{{$ctrl.abstain}} abstain" tooltip-show="$ctrl.tooltips==\'always\' ? true : $ctrl.tooltips==\'never\' ? false : null" tooltip-position="bottom" tooltip-tether="100"></div>\n\t\t\t\t\t<div ng-click="$ctrl.fire(\'onClickReject\')" ng-class="$ctrl.settings.reject.class" style="width: {{$ctrl.settings.reject.width}}%; {{$ctrl.onClickReject && \'cursor: pointer\'}}" tooltip="{{$ctrl.reject}} reject" tooltip-show="$ctrl.tooltips==\'always\' ? true : $ctrl.tooltips==\'never\' ? false : null" tooltip-position="bottom" tooltip-tether="100"></div>\n\t\t\t\t\t<div class="vote-tally-target" style="width: {{$ctrl.settings.target.width}}%">\n\t\t\t\t\t\t<div class="vote-tally-target-arrow-down"></div>\n\t\t\t\t\t\t<div class="vote-tally-target-arrow-up"></div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t\t<div ng-if="$ctrl.summary" class="container row">\n\t\t\t\t\t<div ng-click="$ctrl.fire(\'onClickPass\')" class="col-xs-3 text-center" style="{{$ctrl.onClickPass && \'cursor: pointer\'}}">\n\t\t\t\t\t\t<div ng-class="$ctrl.settings.approve.summaryClass">{{$ctrl.approve}} / {{$ctrl.settings.approve.target}} to pass</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div ng-click="$ctrl.fire(\'onClickReject\')" class="col-xs-3 text-center" style="{{$ctrl.onClickReject && \'cursor: pointer\'}}">\n\t\t\t\t\t\t<div ng-class="$ctrl.settings.reject.summaryClass">{{$ctrl.reject}} / {{$ctrl.settings.reject.target}} to reject</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div ng-click="$ctrl.fire(\'onClickWaiting\')" class="col-xs-3 text-center" style="{{$ctrl.onClickWaiting && \'cursor: pointer\'}}">\n\t\t\t\t\t\t<div ng-class="$ctrl.settings.waiting.summaryClass">{{$ctrl.settings.waiting.count}} to vote</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div ng-click="$ctrl.fire(\'onClickAbstain\')" class="col-xs-3 text-center" style="{{$ctrl.onClickAbstain && \'cursor: pointer\'}}">\n\t\t\t\t\t\t<div ng-class="$ctrl.settings.abstain.summaryClass">{{$ctrl.abstain}} abstaining</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t'
 });
