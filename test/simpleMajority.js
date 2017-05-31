@@ -21,8 +21,8 @@ describe('Utlities > getWinLose({method: "simpleMajority"})', function(){
 
 	it('should calculate variable vote totals with abstains', function() {
 		expect(voteTally.getWinLose({total: 50, abstain: 10, method: 'simpleMajority'})).to.deep.equal({toWin: 21, toLose: 20, voters: 40});
-		expect(voteTally.getWinLose({total: 99, abstain: 20, method: 'simpleMajority'})).to.deep.equal({toWin: 41, toLose: 40, voters: 79});
-		expect(voteTally.getWinLose({total: 100, abstain: 75, method: 'simpleMajority'})).to.deep.equal({toWin: 14, toLose: 13, voters: 25});
+		expect(voteTally.getWinLose({total: 99, abstain: 20, method: 'simpleMajority'})).to.deep.equal({toWin: 41, toLose: 39, voters: 79});
+		expect(voteTally.getWinLose({total: 100, abstain: 75, method: 'simpleMajority'})).to.deep.equal({toWin: 14, toLose: 12, voters: 25});
 	});
 
 });
