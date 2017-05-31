@@ -14,15 +14,15 @@ describe('Utlities > getWinLose({method: "2/3rds"})', function(){
 	});
 
 	it('should calculate variable vote totals', function() {
-		expect(voteTally.getWinLose({total: 50, method: '2/3rds'})).to.deep.equal({toWin: 32, toLose: 17, voters: 50});
+		expect(voteTally.getWinLose({total: 50, method: '2/3rds'})).to.deep.equal({toWin: 34, toLose: 17, voters: 50});
 		expect(voteTally.getWinLose({total: 99, method: '2/3rds'})).to.deep.equal({toWin: 66, toLose: 34, voters: 99});
-		expect(voteTally.getWinLose({total: 100, method: '2/3rds'})).to.deep.equal({toWin: 66, toLose: 34, voters: 100});
+		expect(voteTally.getWinLose({total: 100, method: '2/3rds'})).to.deep.equal({toWin: 67, toLose: 34, voters: 100});
 	});
 
 	it('should calculate variable vote totals with abstains', function() {
-		expect(voteTally.getWinLose({total: 50, abstain: 10, method: '2/3rds'})).to.deep.equal({toWin: 26, toLose: 14, voters: 40});
-		expect(voteTally.getWinLose({total: 99, abstain: 20, method: '2/3rds'})).to.deep.equal({toWin: 52, toLose: 27, voters: 79});
-		expect(voteTally.getWinLose({total: 100, abstain: 75, method: '2/3rds'})).to.deep.equal({toWin: 16, toLose: 9, voters: 25});
+		expect(voteTally.getWinLose({total: 50, abstain: 10, method: '2/3rds'})).to.deep.equal({toWin: 27, toLose: 14, voters: 40});
+		expect(voteTally.getWinLose({total: 99, abstain: 20, method: '2/3rds'})).to.deep.equal({toWin: 53, toLose: 27, voters: 79});
+		expect(voteTally.getWinLose({total: 100, abstain: 75, method: '2/3rds'})).to.deep.equal({toWin: 17, toLose: 9, voters: 25});
 	});
 
 });

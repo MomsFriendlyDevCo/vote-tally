@@ -47,10 +47,10 @@ module.exports = {
 				if (realTotal == 1) return {toWin: 1, toLose: 1, voters: 1};
 				if (realTotal == 2) return {toWin: 2, toLose: 1, voters: 2};
 
-				var third = Math.floor(realTotal / 3);
+				var third = realTotal / 3;
 				return {
-					toWin: third * 2,
-					toLose: third * 1 + 1,
+					toWin: Math.ceil(third * 2),
+					toLose: Math.floor(third) * 1 + 1,
 					voters: realTotal,
 				};
 				break;
