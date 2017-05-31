@@ -44,10 +44,10 @@ angular.module('angular-ui-vote-tally', []).service('VoteTally', function () {
 					if (realTotal == 1) return { toWin: 1, toLose: 1, voters: 1 };
 					if (realTotal == 2) return { toWin: 2, toLose: 1, voters: 2 };
 
-					var third = Math.floor(realTotal / 3);
+					var third = realTotal / 3;
 					return {
-						toWin: third * 2,
-						toLose: third * 1 + 1,
+						toWin: Math.ceil(third * 2),
+						toLose: Math.floor(third) * 1 + 1,
 						voters: realTotal
 					};
 					break;
@@ -55,13 +55,13 @@ angular.module('angular-ui-vote-tally', []).service('VoteTally', function () {
 					if (realTotal == 0) return { toWin: 0, toLose: 0, voters: 0 };
 					if (realTotal == 1) return { toWin: 1, toLose: 1, voters: 1 };
 					if (realTotal == 2) return { toWin: 2, toLose: 1, voters: 2 };
-					if (realTotal == 3) return { toWin: 3, toLose: 1, voters: 3 };
+					if (realTotal == 3) return { toWin: 2, toLose: 2, voters: 3 };
 					if (realTotal == 4) return { toWin: 3, toLose: 2, voters: 4 };
 
 					var fifth = Math.ceil(realTotal / 5);
 					return {
-						toWin: fifth * 3 + 1,
-						toLose: fifth * 2,
+						toWin: fifth * 3,
+						toLose: fifth * 2 + 1,
 						voters: realTotal
 					};
 					break;
@@ -87,10 +87,15 @@ angular.module('angular-ui-vote-tally', []).service('VoteTally', function () {
 				case 'simpleMajority':
 					if (realTotal == 0) return { toWin: 0, toLose: 0, voters: 0 };
 					if (realTotal == 1) return { toWin: 1, toLose: 1, voters: 1 };
+					if (realTotal == 2) return { toWin: 2, toLose: 1, voters: 2 };
+					if (realTotal == 3) return { toWin: 3, toLose: 2, voters: 3 };
 
+					// FIXME: Confirm voting logic -- specifically, how to deal with odd totals?
+					var isTotalOdd = realTotal % 2 == 1;
+					var nearestEven = 2 * Math.round(realTotal / 2);
 					return {
 						toWin: Math.ceil(realTotal / 2) + 1,
-						toLose: Math.ceil(realTotal / 2),
+						toLose: isTotalOdd ? nearestEven / 2 - 1 : Math.ceil(realTotal / 2), // For odd totals, round up to nearest even, half it, and subtract 1.
 						voters: realTotal
 					};
 					break;
