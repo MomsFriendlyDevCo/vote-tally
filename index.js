@@ -21,7 +21,7 @@ module.exports = {
 		},
 		{
 			id: 'unsc',
-			title: 'UN Security Council (9/14ths)',
+			title: 'UN Security Council (9/15ths)',
 			description: 'Used by the UN Security Council in - abstentions do not count during vote counts',
 		},
 		{
@@ -69,12 +69,12 @@ module.exports = {
 				};
 				break;
 			case 'unsc':
-				realTotal = options.total; // Abstentions are ignored in the UNSC. Total SHOULD also be 14 but we're going to allow for more here
+				realTotal = options.total; // Abstentions are ignored in the UNSC. Total SHOULD also be 15 but we're going to allow for more here
 
-				var segment = realTotal / 14;
+				var segment = realTotal / 15;
 				return {
 					toWin: Math.ceil(segment * 9),
-					toLose: Math.ceil(segment * 5),
+					toLose: Math.ceil(segment * 6),
 					voters: realTotal,
 				};
 				break;
