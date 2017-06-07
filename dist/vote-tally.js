@@ -20,7 +20,7 @@ angular.module('angular-ui-vote-tally', []).service('VoteTally', function () {
 			description: 'Used by UN Youth Australia (UNYA) in the Model United Nations competition'
 		}, {
 			id: 'unsc',
-			title: 'UN Security Council (9/14ths)',
+			title: 'UN Security Council (9/15ths)',
 			description: 'Used by the UN Security Council in - abstentions do not count during vote counts'
 		}, {
 			id: 'unanimous',
@@ -66,12 +66,12 @@ angular.module('angular-ui-vote-tally', []).service('VoteTally', function () {
 					};
 					break;
 				case 'unsc':
-					realTotal = options.total; // Abstentions are ignored in the UNSC. Total SHOULD also be 14 but we're going to allow for more here
+					realTotal = options.total; // Abstentions are ignored in the UNSC. Total SHOULD also be 15 but we're going to allow for more here
 
-					var segment = realTotal / 14;
+					var segment = realTotal / 15;
 					return {
 						toWin: Math.ceil(segment * 9),
-						toLose: Math.ceil(segment * 5),
+						toLose: Math.ceil(segment * 6),
 						voters: realTotal
 					};
 					break;
@@ -90,12 +90,11 @@ angular.module('angular-ui-vote-tally', []).service('VoteTally', function () {
 					if (realTotal == 2) return { toWin: 2, toLose: 1, voters: 2 };
 					if (realTotal == 3) return { toWin: 3, toLose: 2, voters: 3 };
 
-					// FIXME: Confirm voting logic -- specifically, how to deal with odd totals?
 					var isTotalOdd = realTotal % 2 == 1;
 					var nearestEven = 2 * Math.round(realTotal / 2);
 					return {
 						toWin: Math.ceil(realTotal / 2) + 1,
-						toLose: isTotalOdd ? nearestEven / 2 - 1 : Math.ceil(realTotal / 2), // For odd totals, round up to nearest even, half it, and subtract 1.
+						toLose: nearestEven / 2,
 						voters: realTotal
 					};
 					break;
