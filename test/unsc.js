@@ -14,17 +14,17 @@ describe('Utlities > getWinLose({method: "unsc"})', function(){
 	});
 
 	it('should calculate variable vote totals', function() {
-		expect(voteTally.getWinLose({total: 14, method: 'unsc'})).to.deep.equal({toWin: 9, toLose: 5, voters: 14});
-		expect(voteTally.getWinLose({total: 50, method: 'unsc'})).to.deep.equal({toWin: 33, toLose: 18, voters: 50});
-		expect(voteTally.getWinLose({total: 99, method: 'unsc'})).to.deep.equal({toWin: 64, toLose: 36, voters: 99});
-		expect(voteTally.getWinLose({total: 100, method: 'unsc'})).to.deep.equal({toWin: 65, toLose: 36, voters: 100});
+		expect(voteTally.getWinLose({total: 15, method: 'unsc'})).to.deep.equal({toWin: 9, toLose: 6, voters: 15});
+		expect(voteTally.getWinLose({total: 50, method: 'unsc'})).to.deep.equal({toWin: 30, toLose: 20, voters: 50});
+		expect(voteTally.getWinLose({total: 99, method: 'unsc'})).to.deep.equal({toWin: 60, toLose: 40, voters: 99});
+		expect(voteTally.getWinLose({total: 100, method: 'unsc'})).to.deep.equal({toWin: 60, toLose: 40, voters: 100});
 	});
 
 	it('should calculate variable vote totals with abstains', function() {
-		expect(voteTally.getWinLose({total: 14, abstain: 3, method: 'unsc'})).to.deep.equal({toWin: 9, toLose: 5, voters: 14});
-		expect(voteTally.getWinLose({total: 50, abstain: 10, method: 'unsc'})).to.deep.equal({toWin: 33, toLose: 18, voters: 50});
-		expect(voteTally.getWinLose({total: 99, abstain: 20, method: 'unsc'})).to.deep.equal({toWin: 64, toLose: 36, voters: 99});
-		expect(voteTally.getWinLose({total: 100, abstain: 75, method: 'unsc'})).to.deep.equal({toWin: 65, toLose: 36, voters: 100});
+		expect(voteTally.getWinLose({total: 15, abstain: 3, method: 'unsc'})).to.deep.equal({toWin: 9, toLose: 6, voters: 15});
+		expect(voteTally.getWinLose({total: 50, abstain: 10, method: 'unsc'})).to.deep.equal({toWin: 30, toLose: 20, voters: 50});
+		expect(voteTally.getWinLose({total: 99, abstain: 20, method: 'unsc'})).to.deep.equal({toWin: 60, toLose: 40, voters: 99});
+		expect(voteTally.getWinLose({total: 100, abstain: 75, method: 'unsc'})).to.deep.equal({toWin: 60, toLose: 40, voters: 100});
 	});
 
 });
